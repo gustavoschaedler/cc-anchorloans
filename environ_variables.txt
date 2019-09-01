@@ -1,0 +1,16 @@
+Windows
+set FLASK_APP=image_library.py
+set FLASK_ENV=development
+set SQLALCHEMY_DATABASE_URI='sqlite:///site.db'
+set SECRET_KEY='7698768bb0876e89g769h876280bb9876'
+set PHOTOS_PER_PAGE=12
+
+Mac/Linux
+export FLASK_APP=image_library.py
+export FLASK_ENV=development
+export SQLALCHEMY_DATABASE_URI='sqlite:///site.db'
+export SECRET_KEY='7698768bb0876e89g769h876280bb9876'
+export PHOTOS_PER_PAGE=12
+
+Run
+flask run
