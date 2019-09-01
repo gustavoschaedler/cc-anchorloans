@@ -10,6 +10,6 @@ main = Blueprint('main', __name__)
 @main.route("/home")
 def home():
     page = request.args.get('page', 1, type=int)
-    photos = Photo.query.order_by(
+    photos = Photo.query.filter(Photo.approved == 1).order_by(
         Photo.date_posted.desc()).paginate(page=page, per_page=int(Config.PHOTOS_PER_PAGE))
     return render_template('home.html', photos=photos)

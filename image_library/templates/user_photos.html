@@ -7,18 +7,26 @@
 {% block content %}
     {% for photo in photos.items %}
         <photo class="media content-section">
-          <div class="media-body">
-            <div class="photo-metadata">
-              <small class="text-muted">{{ photo.date_posted.strftime('%d/%m/%Y - %H:%M:%S') }}</small>
+            <div class="media-body">
+              <div class="photo-metadata">
+                <small class="text-muted">{{ photo.date_posted.strftime('%d/%m/%Y - %H:%M:%S') }}</small>
+              </div>
+              <div classe="photo-content">
+                <img class="img-thumbnail" src="{{ url_for('static', filename='profile_pics/' + photo.image_file) }}">
+              </div>
+              <div class="photo-metadata">
+                {% if photo.approved == 0 %}
+                    <b class="text-danger">Awaiting approval</b>
+                {% else %}
+                    {% if photo.liked == 1 %}
+                      <i onclick="classList.toggle('fa-thumbs-o-up')" class="fa fa-thumbs-up"></i>
+                    {% else %}
+                      <i onclick="classList.toggle('fa-thumbs-up')" class="fa fa-thumbs-o-up"></i>
+                    {% endif %}
+                    <b class="text">{{ photo.likes }} likes</b>
+                {% endif %}
+              </div>
             </div>
-            <div classe="photo-content">
-              <img class="img-thumbnail" src="{{ url_for('static', filename='profile_pics/' + photo.image_file) }}">
-            </div>
-            <div class="photo-metadata">
-                <i onclick="classList.toggle('fa-thumbs-up')" class="fa fa-thumbs-o-up"></i>
-                <b class="text">10 likes</b>
-            </div>
-          </div>
         </photo>
     {% endfor %}
 {% endblock content %}
