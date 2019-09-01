@@ -1,1 +1,1 @@
-web: gunicorn image_library:app
+web gunicorn manage:app
