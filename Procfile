@@ -1,1 +1,1 @@
-web: gunicorn app:image_library
+gunicorn "image_library:create_app()"
