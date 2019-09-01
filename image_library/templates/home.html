@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block header %}
+  <h4 class="mb-4">All images ({{ photos.total }})</h4>
+{% endblock header %}
+
+{% block content %}
+    {% if photos.total == 0 %}
+        <div class="media-body">
+          <div class="photo-content">
+              <h1 class="text">No photos :-(</h1>
+          </div>
+        </div>
+    {% else %}
+      {% for photo in photos.items %}
+          <photo class="media content-section">
+            <div class="media-body">
+              <div class="photo-metadata">
+                <a class="mr-2" href="{{ url_for('users.user_photos', username=photo.author.username) }}">{{ photo.author.username }}</a>
+              </div>
+              <div class="photo-metadata">
+                <small class="text-muted">{{ photo.date_posted.strftime('%d/%m/%Y - %H:%M:%S') }}</small>
+              </div>
+              <div classe="photo-content">
+                <img class="img-thumbnail" src="{{ url_for('static', filename='profile_pics/' + photo.image_file) }}">
+              </div>
+              <div class="photo-metadata">
+                  <i onclick="classList.toggle('fa-thumbs-up')" class="fa fa-thumbs-o-up"></i>
+                  <b class="text">10 likes</b>
+              </div>
+            </div>
+          </photo>
+      {% endfor %}
+    {% endif %}
+{% endblock content %}
+
+{% block footer %}
+    {% for page_num in photos.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if photos.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+{% endblock footer %}
