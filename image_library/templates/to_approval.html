@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
 {% block header %}
-  <h4 class="mb-4">All images ({{ photos.total }})</h4>
+  <h4 class="mb-4">To Approval ({{ photos.total }})</h4>
 {% endblock header %}
 
 {% block content %}
     {% if photos.total == 0 %}
         <div class="media-body">
           <div class="photo-content">
-              <h1 class="text">No photos :-(</h1>
+              <h1 class="text">No photos to approve :-)</h1>
           </div>
         </div>
     {% else %}
@@ -24,13 +24,10 @@
               <div classe="photo-content">
                 <img class="img-thumbnail" src="{{ url_for('static', filename='profile_pics/' + photo.image_file) }}">
               </div>
-              <div class="photo-metadata">
-                  {% if photo.liked == 1 %}
-                    <i onclick="classList.toggle('fa-thumbs-o-up')" class="fa fa-thumbs-up"></i>
-                  {% else %}
-                    <i onclick="classList.toggle('fa-thumbs-up')" class="fa fa-thumbs-o-up"></i>
-                  {% endif %}
-                  <b class="text">{{ photo.likes }} likes</b>
+              <div class="mt-2">  
+                <form action="{{ url_for('photos.approve', photo_id=photo.id) }}" method="POST">
+                  <input class="btn btn-info" type="submit" value="Approve">
+                </form>
               </div>
             </div>
           </photo>

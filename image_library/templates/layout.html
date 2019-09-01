@@ -16,21 +16,28 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Image Library</a>
+          <a class="navbar-brand mr-2" href="/">Image Library</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               {% if current_user.is_authenticated %}
-                <b class="navbar-brand">Hi {{current_user.username}}</b>
+                <b class="navbar">
+                  Hi {{current_user.username}} 
+                  {% if current_user.admin == 1 %}(admin){% endif %}
+                </b>
               {% endif %}
               
-              <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('main.home') }}">All photos</a>
 
               {% if current_user.is_authenticated %}
                 <a class="nav-item nav-link" href="{{ url_for('photos.add_photo') }}">Add Photo</a>
                 <a class="nav-item nav-link" href="{{ url_for('users.account') }}">My Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.user_photos', username=current_user.username) }}">My Photos</a>
+                {% if current_user.admin == 1 %}
+                  <a class="nav-item nav-link" href="{{ url_for('photos.to_approval') }}">To approval</a>
+                {% endif %}
                 <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
               {% else %}
                 <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
@@ -43,7 +50,7 @@
     </header>
     <main role="main" class="container">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}

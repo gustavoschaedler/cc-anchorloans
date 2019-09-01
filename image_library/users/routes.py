@@ -35,7 +35,8 @@ def register():
         user = User(
             username=form.username.data,
             email=form.email.data,
-            password=hashed_password
+            password=hashed_password,
+            admin=form.admin.data
         )
         db.session.add(user)
         db.session.commit()
@@ -77,18 +78,24 @@ def account():
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.admin = form.admin.data
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.admin.data = current_user.admin
 
     image_file = url_for(
         'static', filename='profile_pics/' + current_user.image_file)
 
-    return render_template('account.html', title='Account',
-                           image_file=image_file, form=form)
+    return render_template(
+        'account.html',
+        title='Account',
+        image_file=image_file,
+        form=form
+    )
 
 
 @users.route("/user/<string:username>")

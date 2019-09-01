@@ -15,6 +15,7 @@ class RegistrationForm(FlaskForm):
                              validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
+    admin = BooleanField('Admin')
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -46,6 +47,7 @@ class UpdateAccountForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     picture = FileField('Update Profile Picture',
                         validators=[FileAllowed(['jpg', 'png'])])
+    admin = BooleanField('Admin?')
     submit = SubmitField('Update')
 
     def validate_username(self, username):
