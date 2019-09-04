@@ -3,11 +3,15 @@ from flask_login import LoginManager
 from flask import Flask
 
 from flask_sqlalchemy import SQLAlchemy
+import pymongo
 
 from image_library.config import Config
 
 
 db = SQLAlchemy()
+#client = pymongo.MongoClient("mongodb+srv://user1cc1anchorloans:anchorloansxxx@cluster-cc-anchorloans-q4rqk.mongodb.net/db-cc-anchorloans")
+#db = client["db-cc-anchorloans"]
+
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'users.login'

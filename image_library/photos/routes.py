@@ -26,7 +26,11 @@ def add_photo():
     form = PhotoForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_picture(
+                form.picture.data,
+                False,
+                Config.SAVE_IMAGE_LOCAL
+            )
             current_user.image_file = picture_file
 
         photo = Photo(

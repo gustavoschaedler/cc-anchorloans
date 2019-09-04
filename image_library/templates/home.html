@@ -22,7 +22,7 @@
                 <small class="text-muted">{{ photo.date_posted.strftime('%d/%m/%Y - %H:%M:%S') }}</small>
               </div>
               <div classe="photo-content">
-                <img class="img-thumbnail" src="{{ url_for('static', filename='profile_pics/' + photo.image_file) }}">
+                <img class="img-thumbnail" src="{{ photo.image_file }}">
               </div>
               <div class="photo-metadata">
                   {% if photo.liked == 1 %}

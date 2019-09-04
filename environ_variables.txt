@@ -1,16 +1,18 @@
 Windows
-set FLASK_APP=image_library.py
-set FLASK_ENV=development
-set SQLALCHEMY_DATABASE_URI='sqlite:///site.db'
-set SECRET_KEY='7698768bb0876e89g769h876280bb9876'
-set PHOTOS_PER_PAGE=12
+
 
 Mac/Linux
 export FLASK_APP=image_library.py
 export FLASK_ENV=development
 export SQLALCHEMY_DATABASE_URI='sqlite:///site.db'
-export SECRET_KEY='7698768bb0876e89g769h876280bb9876'
 export PHOTOS_PER_PAGE=12
+export SECRET_KEY=<SECRET_KEY>
+export S3_BUCKET_NAME=<S3_BUCKET_NAME>
+export S3_ACCESS_KEY=<S3_ACCESS_KEY>
+export S3_SECRET_ACCESS_KEY=<S3_SECRET_ACCESS_KEY>
+export S3_REGION=<S3_REGION>
+export SAVE_IMAGE_LOCAL=S3
+export MONGODB_DATABASE_URI=<mongodb uri>
 
 Run
 flask run
